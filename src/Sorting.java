@@ -29,10 +29,12 @@ public class Sorting {
                 return insertion(vet);
 
             case 3:
-                return merge(vet, 0, vet.length - 1);
+                mergeCall(vet, 0, vet.length - 1);
+                return globalCount;
 
             case 4:
-                return quick(vet, 0, vet.length - 1);
+                quickCall(vet, 0, vet.length - 1);
+                return globalCount;
 
             default:
                 return -1;
@@ -45,7 +47,7 @@ public class Sorting {
         int numero;
         int comparacoes = 0;
 
-        while (invertido == true) {
+        while (invertido) {
 
             invertido = false;
 
@@ -190,67 +192,65 @@ public class Sorting {
         return comparacoes;
     }
 
-    private int merge(int A[], int p, int r) {
+    private void mergeCall(int A[], int p, int r){
 
         globalCount = 0;
+        merge(A, p, r);
+    }
+
+    private void merge(int A[], int p, int r) {
 
         if (p < r) {
 
             int q = (p + r) / 2;
             merge(A, p, q);
             merge(A, q + 1, r);
-            globalCount += intercala(A, p, q, r);
+            intercala(A, p, q, r);
         }
-
-        return globalCount;
     }
 
-    private int quick(int a[], int p, int r) {
+    private void quickCall(int a[], int p, int r){
 
         globalCount = 0;
+        quick(a, p, r);
+    }
+
+    private void quick(int a[], int p, int r) {
 
         if (p < r) {
 
-            int vet[] = split(a, p, r);
-
-            int q = vet[0];
-            globalCount += vet[1];
-
+            int q = split(a, p, r);
             quick(a, p, q - 1);
             quick(a, q + 1, r);
         }
-
-        return globalCount;
     }
 
     // Metodos utilitarios
 
-    private int[] split(int[] a, int p, int q) {
+    private int split(int[] a, int p, int q) {
 
         int i = p + 1;
         int j = q;
 
-        int comparacoes = 0;
-
         while (i <= j) {
 
-            comparacoes++; // fez a comparacao do while e deu verdadeiro
+            globalCount++; // fez a comparacao do while e deu verdadeiro
 
             if (a[i] < a[p]) {
 
-                comparacoes++; // entrou no 1o if
+                globalCount++; // entrou no 1o if
                 i++;
 
             } else {
 
                 if (a[j] > a[p]) {
 
-                    comparacoes++; // entrou no 2o if
+                    globalCount++; // entrou no 2o if
                     j--;
 
                 } else {
 
-                    comparacoes++; // entrou no 2o else
+                    globalCount++; // entrou no 2o else
 
                     int aux = a[i];
                     a[i] = a[j];
@@ -259,7 +259,7 @@ public class Sorting {
                     j--;
                 }
 
-                comparacoes++; // entrou no 1o else
+                globalCount++; // entrou no 1o else
             }
         }
 
@@ -267,14 +267,13 @@ public class Sorting {
         a[p] = a[j];
         a[j] = aux;
 
-        int[] out = {j, comparacoes};
-        return out;
+        return j;
     }
 
-    private int intercala(int[] A, int p, int q, int r) {
+    private void intercala(int[] A, int p, int q, int r) {
 
         int[] B = new int[A.length];
-        int i, j, k, comparacoes = 0;
+        int i, j, k;
 
         for (i = p; i <= q; i++) {
 
@@ -283,6 +282,7 @@ public class Sorting {
 
         for (j = q + 1; j <= r; j++) {
 
+            globalCount++;
             B[r + q + 1 - j] = A[j];
         }
 
@@ -293,18 +293,18 @@ public class Sorting {
 
             if (B[i] <= B[j]) {
 
+                globalCount++;
                 A[k] = B[i];
                 i = i + 1;
 
             } else {
 
+                globalCount++;
                 A[k] = B[j];
                 j = j - 1;
             }
-            comparacoes++;
+            globalCount++;
         }
-
-        return comparacoes;
     }
 
     public void fillRandom (int[] v){
