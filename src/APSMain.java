@@ -21,7 +21,7 @@ public class APSMain {
         int[] vetor6 = new int[10000];
         int[][] matVetores = {vetor1, vetor2, vetor3, vetor4, vetor5, vetor6};
 
-        for (int i = 0; i < matVetores[0].length; i++) {
+        for (int i = 0; i <= matVetores[0].length; i++) {
 
             Sorting s = new Sorting();
 
@@ -30,7 +30,7 @@ public class APSMain {
 
         } // preencher vetores
 
-        for (int i = 0; i < matVetores[0].length; i++){
+        for (int i = 0; i <= matVetores[0].length; i++){
 
             for (int j = 0; j < 5; j++) {
 
