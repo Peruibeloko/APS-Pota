@@ -37,12 +37,12 @@ public class APSMain {
                 Sorting s = new Sorting();
 
                 int[] vetTemp = matVetores[i].clone();
-                long tempo = System.currentTimeMillis();
+                long tempo = System.nanoTime();
                 int comparacoes = s.sort(j, vetTemp);
 
                 System.out.printf("\nResultado com %d elementos (Algoritmo no. %d): %s", matVetores[i].length, j + 1, Arrays.toString(vetTemp));
                 System.out.printf("\nTotal de comparacoes: %d", comparacoes);
-                System.out.printf("\nTempo de Execucao(ms): %d\n", (System.currentTimeMillis() - tempo));
+                System.out.printf("\nTempo de Execucao(ns): %d\n", (System.nanoTime() - tempo));
             }
         }
     }
