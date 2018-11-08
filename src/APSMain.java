@@ -31,6 +31,9 @@ public class APSMain {
 
         } // preencher vetores
 
+        long[][] tempos1 = new long[6][5], tempos2 = new long[6][5];
+        int[][] comparacoes = new int[6][5];
+
         for (int i = 0; i <= matVetores[0].length; i++){
 
             for (int j = 0; j < 5; j++) {
@@ -38,13 +41,40 @@ public class APSMain {
                 Sorting s = new Sorting();
 
                 int[] vetTemp = matVetores[i].clone();
-                long tempo = System.nanoTime();
-                int comparacoes = s.sort(j, vetTemp);
+
+                tempos1[i][j] = System.nanoTime();
+                comparacoes[i][j] = s.sort(j, vetTemp);
+                tempos2[i][j] = System.nanoTime();
 
                 System.out.printf("\nResultado com %d elementos (%s): %s", matVetores[i].length, algoritmos[j], Arrays.toString(vetTemp));
-                System.out.printf("\nTotal de comparacoes: %d", comparacoes);
-                System.out.printf("\nTempo de Execucao(ms): %.3f\n", (double) (System.nanoTime() - tempo)/1000000);
+                System.out.printf("\nTotal de comparações: %d", comparacoes[i][j]);
+                System.out.printf("\nTempo de Execuçao: %.3fms\n", (double) (tempos2[i][j] - tempos1[i][j])/1000000);
+
             }
         }
+
+        /* //Auxilio para a criacao de tabelas
+
+        for (int k = 0; k < 6; k++){
+
+            for (int l = 0; l < 5; l++) {
+
+                System.out.printf("%d;", comparacoes[k][l]);
+                if (l == 4)
+                    System.out.print("\n");
+            }
+        }
+
+        for (int k = 0; k < 6; k++){
+
+            for (int l = 0; l < 5; l++) {
+
+                System.out.printf("%.4f;", (double) (tempos2[k][l] - tempos1[k][l]) / 1000000);
+                if (l == 4)
+                    System.out.print("\n");
+            }
+        }
+
+        */
     }
 }
