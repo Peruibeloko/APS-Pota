@@ -79,6 +79,7 @@ public class Sorting {
             for (int j = i + 1; j < vetor.length; j++) {
 
                 if (vetor[j] < vetor[dado]) {
+
                     dado = j;
                 }
                 comparacoes++;
@@ -92,56 +93,12 @@ public class Sorting {
         return comparacoes;
     }
 
-    private int cocktail(int[] vetor) {
-
-        boolean invertido;
-        int numero;
-        int comparacoes = 0;
-
-        do {
-
-            invertido = false;
-            for (int i = 1; i <= vetor.length - 1; i++) { // IDA
-
-                if (vetor[i - 1] > vetor[i]) {
-
-                    numero = vetor[i - 1];
-                    vetor[i - 1] = vetor[i];
-                    vetor[i] = numero;
-                    invertido = true;
-                }
-                comparacoes++;
-            }
-
-            if (!invertido) {
-                return comparacoes;
-            }
-
-            invertido = false;
-
-            for (int i = vetor.length - 1; i >= 1; i--) { // VOLTA
-
-                if (vetor[i - 1] > vetor[i]) {
-
-                    numero = vetor[i - 1];
-                    vetor[i - 1] = vetor[i];
-                    vetor[i] = numero;
-                    invertido = true;
-                }
-                comparacoes++;
-            }
-
-        } while (invertido);
-
-        return comparacoes;
-    }
-
     private int insertion(int[] vetor) {
 
         int j;
         int comparacoes = 0;
 
-        for (int i = 1; i < vetor.length - 1; i++) {
+        for (int i = 1; i < vetor.length; i++) {
 
             j = i;
 
@@ -152,40 +109,6 @@ public class Sorting {
                 vetor[j] = temp;
                 j = j - 1;
                 comparacoes++;
-            }
-        }
-
-        return comparacoes;
-    }
-
-    private int shell(int[] vetor) {
-
-        int valor;
-        int gap = 1;
-        int comparacoes = 0;
-
-        while (gap < vetor.length) {
-
-            gap = 3 * gap + 1;
-        }
-
-        while (gap > 1) {
-
-            gap /= 3;
-
-            for (int i = gap; i < vetor.length; i++) {
-
-                valor = vetor[i];
-                int j = i;
-
-                while (j >= gap && valor < vetor[j - gap]) {
-
-                    vetor[j] = vetor[j - gap];
-                    j = j - gap;
-                    comparacoes++;
-                }
-
-                vetor[j] = valor;
             }
         }
 
@@ -234,23 +157,17 @@ public class Sorting {
 
         while (i <= j) {
 
-            globalCount++; // fez a comparacao do while e deu verdadeiro
-
             if (a[i] < a[p]) {
 
-                globalCount++; // entrou no 1o if
                 i++;
 
             } else {
 
                 if (a[j] > a[p]) {
 
-                    globalCount++; // entrou no 2o if
                     j--;
 
                 } else {
-
-                    globalCount++; // entrou no 2o else
 
                     int aux = a[i];
                     a[i] = a[j];
@@ -259,8 +176,10 @@ public class Sorting {
                     j--;
                 }
 
-                globalCount++; // entrou no 1o else
+                globalCount++;
             }
+
+            globalCount++;
         }
 
         int aux = a[p];
@@ -282,7 +201,6 @@ public class Sorting {
 
         for (j = q + 1; j <= r; j++) {
 
-            globalCount++;
             B[r + q + 1 - j] = A[j];
         }
 
@@ -293,13 +211,11 @@ public class Sorting {
 
             if (B[i] <= B[j]) {
 
-                globalCount++;
                 A[k] = B[i];
                 i = i + 1;
 
             } else {
 
-                globalCount++;
                 A[k] = B[j];
                 j = j - 1;
             }

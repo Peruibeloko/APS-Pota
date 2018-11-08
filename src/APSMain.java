@@ -20,6 +20,7 @@ public class APSMain {
         int[] vetor5 = new int[1000];
         int[] vetor6 = new int[10000];
         int[][] matVetores = {vetor1, vetor2, vetor3, vetor4, vetor5, vetor6};
+        String[] algoritmos = {"Bubble", "Selection", "Insertion", "Merge", "Quick"};
 
         for (int i = 0; i <= matVetores[0].length; i++) {
 
@@ -40,9 +41,9 @@ public class APSMain {
                 long tempo = System.nanoTime();
                 int comparacoes = s.sort(j, vetTemp);
 
-                System.out.printf("\nResultado com %d elementos (Algoritmo no. %d): %s", matVetores[i].length, j + 1, Arrays.toString(vetTemp));
+                System.out.printf("\nResultado com %d elementos (%s): %s", matVetores[i].length, algoritmos[j], Arrays.toString(vetTemp));
                 System.out.printf("\nTotal de comparacoes: %d", comparacoes);
-                System.out.printf("\nTempo de Execucao(ns): %d\n", (System.nanoTime() - tempo));
+                System.out.printf("\nTempo de Execucao(ms): %.3f\n", (double) (System.nanoTime() - tempo)/1000000);
             }
         }
     }
